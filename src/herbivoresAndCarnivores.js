@@ -10,13 +10,7 @@ class Animal {
   }
 
   checkHealth() {
-    if (this.health <= 0) {
-      const index = Animal.alive.indexOf(this);
-
-      if (index > -1) {
-        Animal.alive.splice(index, 1);
-      }
-    }
+    Animal.alive = Animal.alive.filter((animal) => animal.health > 0);
   }
 }
 
@@ -36,13 +30,7 @@ class Carnivore extends Animal {
     if (prey instanceof Herbivore && !prey.hidden) {
       prey.health -= 50;
 
-      if (prey.health <= 0) {
-        const index = Animal.alive.indexOf(prey);
-
-        if (index > -1) {
-          Animal.alive.splice(index, 1);
-        }
-      }
+      prey.checkHealth();
     }
   }
 }
